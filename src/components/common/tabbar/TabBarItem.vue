@@ -2,15 +2,20 @@
     <div class="tar-bar-item" @click="itemClick">
           <!-- <img src="../../assets/img/tabbar/home.svg" alt="">   //这里不能写死，所以用slot的name -->
         <!-- <div>首页</div> -->
+
+        <!-- item-icon 插槽用于显示非激活状态的图标； -->
+        <!-- item-icon-active 插槽用于显示激活状态的图标； -->
+        <!-- item-text 插槽用于显示文本内容。 -->
         <div v-if="!isActive">
           <slot  name="item-icon"></slot>
         </div>
         <div v-else >
           <slot  name="item-icon-active"></slot>
         </div>
+        
         <!-- <div :class="{active : isActive}"> -->
-          <div :style="activeStyle">
-            <slot name="item-text"></slot>
+        <div :style="activeStyle">
+          <slot name="item-text"></slot>
         </div>
     </div>
 </template>
