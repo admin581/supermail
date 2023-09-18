@@ -45,14 +45,20 @@ export default {
     },
     methods : {
       itemClick(){
-        console.log('itemclick')
-        //想让按钮可以返回就用push，不想返回就用replace
-        // this.$router.push()
-       console.log(this.path)
-        this.$router.replace(this.path)
-      }
+      //   console.log('itemclick')
+      //   //想让按钮可以返回就用push，不想返回就用replace
+      //   // this.$router.push()
+      //  console.log(this.path)
+      //   this.$router.replace(this.path)
 
+// 下面代码用来判断当你点击相同的路由是，可以增加判断
+       // 判断当前路由是否与要跳转的路由相同
+       if (this.$route.path === this.path) {
+        return
+      }
+      this.$router.push(this.path) // 进行正常的导航
     }
+  }
 }
 
 </script>

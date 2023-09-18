@@ -1,18 +1,47 @@
+<!-- eslint-disable vue/valid-v-for -->
 <template>
   <div id="home">
     <nav-bar class="home-nav">
       <div slot="center">购物街</div>
     </nav-bar>
+    <home-swiper :banners="banners"></home-swiper>
+
   </div>
 </template>
 
 <script>
 import NavBar from 'components/common/navbar/NavBar.vue'
+// eslint-disable-next-line no-unused-vars
+import HomeSwiper from './childComps/HomeSwiper'
+
+import  {getHomeMultidata} from 'network/home.js'
+
+ 
   export default {
     // eslint-disable-next-line vue/multi-word-component-names
     name: "Home",
     components : {
-      NavBar
+      NavBar,
+      HomeSwiper
+    },
+    data(){
+      return {
+        // result : null
+        banners : [],
+        recommends : []
+      }
+    },
+    created(){
+      //1,请求多个数据
+      getHomeMultidata().then(res => {
+        console.log(res)
+        //这一行是为了保存数据；因为函数执行完之后，里面的数据就会被回收
+        // this.result = res
+        this.banners = res.data.data.banner.list
+        this.recommends = res.data.data.recommend.list
+        console.log(this.banners) // 添加这行代码来检查 banners 数组是否有正确的数据  
+
+      })
     }
   }
 </script>
