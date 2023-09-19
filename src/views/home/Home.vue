@@ -7,6 +7,7 @@
     <home-swiper :banners="banners"></home-swiper>
     <recommend-view :recommends="recommends"></recommend-view>
     <feature-view/>
+    <tab-control :titles="['流行','新款','精选']"></tab-control>
     <ul>
       <li v-for="index in 100" :key="index"> 这是第{{ index }}个li元素</li>
     </ul>
@@ -16,13 +17,17 @@
 </template>
 
 <script>
-import NavBar from 'components/common/navbar/NavBar.vue'
 // eslint-disable-next-line no-unused-vars
 import HomeSwiper from './childComps/HomeSwiper'
 // eslint-disable-next-line no-unused-vars
 import RecommendView from './childComps/RecommendView.vue'
 import FeatureView from './childComps/FeatureView.vue'
 
+//公共组件
+import NavBar from 'components/common/navbar/NavBar.vue'
+import TabControl from 'components/content/tabcontrol/TabControl'
+
+//方法
 import  {getHomeMultidata} from 'network/home.js'
 
   export default {
@@ -32,7 +37,8 @@ import  {getHomeMultidata} from 'network/home.js'
       NavBar,
       HomeSwiper,
       RecommendView,
-      FeatureView
+      FeatureView,
+      TabControl
     },
     data(){
       return {
