@@ -17,9 +17,7 @@
 </template>
 
 <script>
-// eslint-disable-next-line no-unused-vars
 import HomeSwiper from './childComps/HomeSwiper'
-// eslint-disable-next-line no-unused-vars
 import RecommendView from './childComps/RecommendView.vue'
 import FeatureView from './childComps/FeatureView.vue'
 
@@ -27,8 +25,8 @@ import FeatureView from './childComps/FeatureView.vue'
 import NavBar from 'components/common/navbar/NavBar.vue'
 import TabControl from 'components/content/tabcontrol/TabControl'
 
-//方法
-import  {getHomeMultidata} from 'network/home.js'
+//方法,请求网络数据
+import  {getHomeMultidata , getHomeGoods} from 'network/home.js'
 
   export default {
     // eslint-disable-next-line vue/multi-word-component-names
@@ -44,12 +42,27 @@ import  {getHomeMultidata} from 'network/home.js'
       return {
         // result : null
         banners : [],
-        recommends : []
+        recommends : [],
+        goods : {
+          'pop' : {page : 0 , list : []},
+          'new' : {page : 0 , list : []},
+          'sell' : {page : 0 , list : []}
+        }
       }
     },
+    //写主要的逻辑
     created(){
       //1,请求多个数据
-      getHomeMultidata().then(res => {
+      this.getHomeMultidata
+
+      //请求商品数据
+      this.getHomeGoods('pop')
+      this.getHomeGoods('new')
+      this.getHomeGoods('sell')
+    },
+    methods : {
+      getHomeMultidata(){
+        getHomeMultidata().then(res => {
         console.log(res)
         //这一行是为了保存数据；因为函数执行完之后，里面的数据就会被回收
         // this.result = res
@@ -58,6 +71,15 @@ import  {getHomeMultidata} from 'network/home.js'
         console.log(this.banners) // 添加这行代码来检查 banners 数组是否有正确的数据  
         console.log(this.recommends) // 添加这行代码来检查 banners 数组是否有正确的数据  
       })
+      },
+      getHomeGoods(type){
+        const page = this.goods[type].page + 1
+        getHomeGoods(type,page).then(res => {
+          console.log(res)
+          this.goods[type].list.push(...res.data.list)
+          this.goods[type].page += 1
+      })
+      }
     }
   }
 </script>
