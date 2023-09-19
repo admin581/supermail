@@ -7,7 +7,7 @@
     <home-swiper :banners="banners"></home-swiper>
     <recommend-view :recommends="recommends"></recommend-view>
     <feature-view/>
-    <tab-control :class="tab-control"   :titles="['流行','新款','精选']"></tab-control>
+    <tab-control class="tab-control"   :titles="['流行','新款','精选']"></tab-control>
     <ul>
       <li v-for="index in 100" :key="index"> 这是第{{ index }}个li元素</li>
     </ul>
