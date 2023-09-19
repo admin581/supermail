@@ -7,7 +7,7 @@
     <home-swiper :banners="banners"></home-swiper>
     <recommend-view :recommends="recommends"></recommend-view>
     <feature-view/>
-    <tab-control :titles="['流行','新款','精选']"></tab-control>
+    <tab-control :class="tab-control"   :titles="['流行','新款','精选']"></tab-control>
     <ul>
       <li v-for="index in 100" :key="index"> 这是第{{ index }}个li元素</li>
     </ul>
@@ -79,5 +79,11 @@ import  {getHomeMultidata} from 'network/home.js'
     top: 0;
     height: 44px; /* 标题栏的高度 */
     z-index : 9
+  }
+
+  /*用来向上推动tab-control这个的内容，他会在页面停留*/
+  .tab-control{
+    position: sticky;
+    top : 44px
   }
 </style>
