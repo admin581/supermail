@@ -5,6 +5,7 @@
       <div slot="center">购物街</div>
     </nav-bar>
     <home-swiper :banners="banners"></home-swiper>
+    <recommend-view :recommends="recommends"></recommend-view>
 
   </div>
 </template>
@@ -13,6 +14,8 @@
 import NavBar from 'components/common/navbar/NavBar.vue'
 // eslint-disable-next-line no-unused-vars
 import HomeSwiper from './childComps/HomeSwiper'
+// eslint-disable-next-line no-unused-vars
+import RecommendView from './childComps/RecommendView.vue'
 
 import  {getHomeMultidata} from 'network/home.js'
 
@@ -21,7 +24,8 @@ import  {getHomeMultidata} from 'network/home.js'
     name: "Home",
     components : {
       NavBar,
-      HomeSwiper
+      HomeSwiper,
+      RecommendView
     },
     data(){
       return {
@@ -39,7 +43,7 @@ import  {getHomeMultidata} from 'network/home.js'
         this.banners = res.data.data.banner.list
         this.recommends = res.data.data.recommend.list
         console.log(this.banners) // 添加这行代码来检查 banners 数组是否有正确的数据  
-
+        console.log(this.recommends) // 添加这行代码来检查 banners 数组是否有正确的数据  
       })
     }
   }
