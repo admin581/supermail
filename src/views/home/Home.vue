@@ -6,6 +6,11 @@
     </nav-bar>
     <home-swiper :banners="banners"></home-swiper>
     <recommend-view :recommends="recommends"></recommend-view>
+    <feature-view/>
+    <ul>
+      <li v-for="index in 100" :key="index"> 这是第{{ index }}个li元素</li>
+    </ul>
+   <!-- ul>li{这是第$个li元素}*100 -->
 
   </div>
 </template>
@@ -16,6 +21,7 @@ import NavBar from 'components/common/navbar/NavBar.vue'
 import HomeSwiper from './childComps/HomeSwiper'
 // eslint-disable-next-line no-unused-vars
 import RecommendView from './childComps/RecommendView.vue'
+import FeatureView from './childComps/FeatureView.vue'
 
 import  {getHomeMultidata} from 'network/home.js'
 
@@ -25,7 +31,8 @@ import  {getHomeMultidata} from 'network/home.js'
     components : {
       NavBar,
       HomeSwiper,
-      RecommendView
+      RecommendView,
+      FeatureView
     },
     data(){
       return {
@@ -50,8 +57,21 @@ import  {getHomeMultidata} from 'network/home.js'
 </script>
 
 <style scoped>
+
+  #home{
+    margin-top: 44px; /* 标题栏的高度 */
+
+  }
+
   .home-nav{
     background-color: var(--color-tint);
     color : #fff;
+
+    position: fixed;
+    left: 0;
+    right: 0;
+    top: 0;
+    height: 44px; /* 标题栏的高度 */
+    z-index : 9
   }
 </style>
