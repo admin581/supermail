@@ -53,7 +53,7 @@ import  {getHomeMultidata , getHomeGoods} from 'network/home.js'
     //写主要的逻辑
     created(){
       //1,请求多个数据
-      this.getHomeMultidata
+      this.getHomeMultidata()
 
       //请求商品数据
       this.getHomeGoods('pop')
