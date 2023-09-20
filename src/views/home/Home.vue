@@ -76,7 +76,7 @@ import  {getHomeMultidata , getHomeGoods} from 'network/home.js'
         const page = this.goods[type].page + 1
         getHomeGoods(type,page).then(res => {
           console.log(res)
-          this.goods[type].list.push(...res.data.list)
+          this.goods[type].list.push(...res.data.data.list)
           this.goods[type].page += 1
       })
       }

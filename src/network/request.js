@@ -3,8 +3,10 @@ import axios from 'axios'
 
 export function request(config){
     const instance = axios.create({
-        baseURL : 'http://123.207.32.32:8000',
-        timeout : 5000
+        // baseURL: 'http://123.207.32.32:8000',
+        // 新的接口地址
+        baseURL : 'http://123.207.32.32:7888/api/hy66',
+        timeout : 5000,
     })
 
     // 2.axiox的拦截器
