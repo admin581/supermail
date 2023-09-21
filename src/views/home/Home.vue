@@ -7,7 +7,11 @@
     <home-swiper :banners="banners"></home-swiper>
     <recommend-view :recommends="recommends"></recommend-view>
     <feature-view/>
-    <tab-control class="tab-control"   :titles="['流行','新款','精选']"></tab-control>
+    <tab-control class="tab-control"   
+                  :titles="['流行','新款','精选']"
+                  @tabClick="tabClick"/>
+    <goods-list :goods="showGoods"> </goods-list>
+
     <ul>
       <li v-for="index in 100" :key="index"> 这是第{{ index }}个li元素</li>
     </ul>
@@ -24,6 +28,7 @@ import FeatureView from './childComps/FeatureView.vue'
 //公共组件
 import NavBar from 'components/common/navbar/NavBar.vue'
 import TabControl from 'components/content/tabcontrol/TabControl'
+import GoodsList from 'components/content/goods/GoodsList'
 
 //方法,请求网络数据
 import  {getHomeMultidata , getHomeGoods} from 'network/home.js'
@@ -36,7 +41,8 @@ import  {getHomeMultidata , getHomeGoods} from 'network/home.js'
       HomeSwiper,
       RecommendView,
       FeatureView,
-      TabControl
+      TabControl,
+      GoodsList,
     },
     data(){
       return {
@@ -47,8 +53,15 @@ import  {getHomeMultidata , getHomeGoods} from 'network/home.js'
           'pop' : {page : 0 , list : []},
           'new' : {page : 0 , list : []},
           'sell' : {page : 0 , list : []}
-        }
+        },
+        currentType : 'pop'
       }
+    },
+    computed:{
+      showGoods(){
+        return this.goods[this.currentType].list
+      }
+
     },
     //写主要的逻辑
     created(){
@@ -61,6 +74,27 @@ import  {getHomeMultidata , getHomeGoods} from 'network/home.js'
       this.getHomeGoods('sell')
     },
     methods : {
+
+      /**
+       * 事件监听相关的方法
+       */
+      tabClick(index){
+        console.log(index);
+        switch(index){
+          case 0 : 
+            this.currentType = 'pop'
+            break
+          case 1 : 
+            this.currentType = 'new'
+            break
+          case 2 : 
+            this.currentType = 'sell'
+        }
+      },
+
+      /**
+       * 网络请求的相关的方法
+       */
       getHomeMultidata(){
         getHomeMultidata().then(res => {
         console.log(res)
@@ -100,12 +134,13 @@ import  {getHomeMultidata , getHomeGoods} from 'network/home.js'
     right: 0;
     top: 0;
     height: 44px; /* 标题栏的高度 */
-    z-index : 9
+    z-index : 9;
   }
 
   /*用来向上推动tab-control这个的内容，他会在页面停留*/
   .tab-control{
     position: sticky;
-    top : 44px
+    top : 44px;
+    z-index : 9;
   }
 </style>
