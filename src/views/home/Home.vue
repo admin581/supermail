@@ -1,18 +1,17 @@
 <!-- eslint-disable vue/valid-v-for -->
 <template>
-  <div id="home">
+  <div id="home" class="wrapper">
     <nav-bar class="home-nav">
       <div slot="center">购物街</div>
     </nav-bar>
-    <home-swiper :banners="banners"></home-swiper>
-    <recommend-view :recommends="recommends"></recommend-view>
+    <home-swiper :banners="banners"/>
+    <recommend-view :recommends="recommends"/>
     <feature-view/>
     <tab-control class="tab-control"   
                   :titles="['流行','新款','精选']"
                   @tabClick="tabClick"/>
-    <goods-list :goods="showGoods"> </goods-list>
-
-
+    <goods-list :goods="showGoods"/>
+    <!-- <main-tab-bar></main-tab-bar> -->
   </div>
 </template>
 
@@ -26,6 +25,8 @@ import NavBar from 'components/common/navbar/NavBar.vue'
 import TabControl from 'components/content/tabcontrol/TabControl'
 import GoodsList from 'components/content/goods/GoodsList'
 
+// import MainTabBar from 'components/content/maintabbar/MainTabBar.vue';
+
 //方法,请求网络数据
 import  {getHomeMultidata , getHomeGoods} from 'network/home.js'
 
@@ -33,6 +34,7 @@ import  {getHomeMultidata , getHomeGoods} from 'network/home.js'
     // eslint-disable-next-line vue/multi-word-component-names
     name: "Home",
     components : {
+      // MainTabBar,
       NavBar,
       HomeSwiper,
       RecommendView,
@@ -120,6 +122,10 @@ import  {getHomeMultidata , getHomeGoods} from 'network/home.js'
     padding-top: 44px;  /*标题栏的高度 */
     height: 100vh;
     position: relative;
+    /* display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center; */
 
   }
 
@@ -131,7 +137,6 @@ import  {getHomeMultidata , getHomeGoods} from 'network/home.js'
     left: 0;
     right: 0;
     top: 0;
-    height: 44px; /* 标题栏的高度 */
     z-index : 9;
   }
 
@@ -140,6 +145,7 @@ import  {getHomeMultidata , getHomeGoods} from 'network/home.js'
     position: sticky;
     top : 44px;
     z-index : 9;
+    /* margin-top: 44px; */
   }
 
   .content{
@@ -152,5 +158,9 @@ import  {getHomeMultidata , getHomeGoods} from 'network/home.js'
     bottom: 49x;
     left: 0;
     right: 0;
+
+    /* flex: 1;
+    padding-bottom: 20px; */
+
   }
 </style>
