@@ -4,14 +4,16 @@
     <nav-bar class="home-nav">
       <div slot="center">购物街</div>
     </nav-bar>
-    <home-swiper :banners="banners"/>
-    <recommend-view :recommends="recommends"/>
-    <feature-view/>
-    <tab-control class="tab-control"   
+    <scroll>
+      <home-swiper :banners="banners"/>
+      <recommend-view :recommends="recommends"/>
+      <feature-view/>
+      <tab-control class="tab-control"   
                   :titles="['流行','新款','精选']"
                   @tabClick="tabClick"/>
-    <goods-list :goods="showGoods"/>
-    <!-- <main-tab-bar></main-tab-bar> -->
+      <goods-list :goods="showGoods"/>
+    </scroll>
+    
   </div>
 </template>
 
@@ -24,6 +26,7 @@ import FeatureView from './childComps/FeatureView.vue'
 import NavBar from 'components/common/navbar/NavBar.vue'
 import TabControl from 'components/content/tabcontrol/TabControl'
 import GoodsList from 'components/content/goods/GoodsList'
+import BackTop from 'components/content/backTop/BackTop'
 
 // import MainTabBar from 'components/content/maintabbar/MainTabBar.vue';
 
@@ -41,6 +44,7 @@ import  {getHomeMultidata , getHomeGoods} from 'network/home.js'
       FeatureView,
       TabControl,
       GoodsList,
+      BackTop,
     },
     data(){
       return {
