@@ -12,10 +12,6 @@
                   @tabClick="tabClick"/>
     <goods-list :goods="showGoods"> </goods-list>
 
-    <ul>
-      <li v-for="index in 100" :key="index"> 这是第{{ index }}个li元素</li>
-    </ul>
-   <!-- ul>li{这是第$个li元素}*100 -->
 
   </div>
 </template>
@@ -121,7 +117,9 @@ import  {getHomeMultidata , getHomeGoods} from 'network/home.js'
 <style scoped>
 
   #home{
-    margin-top: 44px; /* 标题栏的高度 */
+    padding-top: 44px;  /*标题栏的高度 */
+    height: 100vh;
+    position: relative;
 
   }
 
@@ -142,5 +140,17 @@ import  {getHomeMultidata , getHomeGoods} from 'network/home.js'
     position: sticky;
     top : 44px;
     z-index : 9;
+  }
+
+  .content{
+    /* height: calc(100% - 93px); */
+    overflow: hidden;
+    /* margin-top: 52px; */
+
+    position: absolute;
+    top: 44px;
+    bottom: 49x;
+    left: 0;
+    right: 0;
   }
 </style>
