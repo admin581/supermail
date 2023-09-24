@@ -1,7 +1,7 @@
 <!-- eslint-disable vue/multi-word-component-names -->
 <!-- eslint-disable no-unused-vars -->
 <template>
-<div class="wrapper" ref="wrapper">
+<div ref="wrapper" class="wrapper" >
     <div class="content">
         <slot></slot>
     </div>
@@ -12,15 +12,25 @@
 import BScroll from "better-scroll"
 export default {
     // eslint-disable-next-line
-    name : "scroll",
+    name : "Scroll",
     props:{
         probeType : {
             type : Number,
             default : 0
         },
+        click: {
+            type: Boolean,
+            default: true
+        },
         pullingUp : {
             type : Boolean,
             default : false
+        },
+        data: {
+            type: Array,
+            default() {
+                return []
+            }
         }
     },
     data(){
