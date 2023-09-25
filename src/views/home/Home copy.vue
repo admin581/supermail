@@ -9,7 +9,7 @@
             :probe-type="3" 
             @scroll="contentScroll"
             :pull-up-load="true"
-            >
+            @pullingUp="loadMore">
       <home-swiper :banners="banners"/>
       <recommend-view :recommends="recommends"/>
       <feature-view/>
@@ -36,7 +36,6 @@ import BackTop from 'components/content/backTop/BackTop'
 
 //方法,请求网络数据
 import  {getHomeMultidata , getHomeGoods} from 'network/home.js'
-// import { set } from 'vue/types/umd'
 
   export default {
     // eslint-disable-next-line vue/multi-word-component-names
@@ -81,38 +80,12 @@ import  {getHomeMultidata , getHomeGoods} from 'network/home.js'
       this.getHomeGoods('pop')
       this.getHomeGoods('new')
       this.getHomeGoods('sell')
-
-      
-    },
-    mounted(){
-      // //3.监听item中图片加载完成
-      // this.$bus.$on('itemImageLoad',() => {
-      //   console.log('----------')
-      //   this.$refs.scroll.refresh()
-      // })
-
-      // 防抖
-      const refresh = this.debounce(this.$refs.scroll.refresh,200)
-
-      this.$bus.$on('itemImageLoad',() =>{
-        refresh()
-      })
     },
     methods : {
 
       /**
        * 事件监听相关的方法
        */
-      debounce(func,delay){
-        let  timer =null
-
-        return function(...args){
-            if(timer) clearTimeout(timer)
-            timer = setTimeout(() => {
-              func.apply(this,args)
-            },delay)
-        }
-      },
       tabClick(index){
         console.log(index);
         switch(index){
@@ -131,10 +104,14 @@ import  {getHomeMultidata , getHomeGoods} from 'network/home.js'
         this.$refs.scroll.scrollTo(0,0)
       },
       contentScroll(position){
-        // console.log(position)
+        console.log(position)
         this.isShowBackTop = (-position.y) > 1000
       },
-      
+      loadMore(){
+        // console.log('上拉加载更多');
+        this.getHomeGoods(this.currentType)
+        this.$refs.scroll.scroll.refresh()
+      },
       /**
        * 网络请求的相关的方法
        */
@@ -156,6 +133,7 @@ import  {getHomeMultidata , getHomeGoods} from 'network/home.js'
           this.goods[type].list.push(...res.data.data.list)
           this.goods[type].page += 1
 
+          this.$refs.scroll.finishPullUp()
       })
       }
     }

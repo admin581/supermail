@@ -1,6 +1,6 @@
 <template>
 <div class="goods-item">
-    <img :src="goodsItem.show.img" alt="">
+    <img :src="goodsItem.show.img" alt="" @load="imageLoad">
     <div class="goods-info">
         <p>{{ goodsItem.title }}</p>
         <span class="price">{{  goodsItem.orgPrice }}</span>
@@ -19,7 +19,14 @@ export default {
             default(){
                 return {}
             }
-        }
+        },
+    },
+    
+    methods :{
+      imageLoad(){
+        //  console.log('imageload');
+        this.$bus.$emit('itemImageLoad')
+      }
     }
 }
 </script>
@@ -28,7 +35,7 @@ export default {
 .goods-item {
     padding-bottom: 40px;
     position: relative;
-    /* width: 48%; */
+    width: 48%;
   }
 
   .goods-item img {

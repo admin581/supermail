@@ -22,16 +22,7 @@ export default {
             type: Boolean,
             default: true
         },
-        pullingUp : {
-            type : Boolean,
-            default : false
-        },
-        data: {
-            type: Array,
-            default() {
-                return []
-            }
-        }
+       
     },
     data(){
         return {
@@ -48,25 +39,26 @@ export default {
 
         //2.监听滚动区域的位置
         this.scroll.on('scroll',(position) => {
-            // console.log(position)
+            console.log(position)
             this.$emit('scroll',position)
         })
 
 
-        //3.上拉加载更多
-        this.scroll.on('pullingUp',()=>{
-            console.log('上拉加载更多')
-            this.$emit('pullingUp')
-        })
+        
+      
 
     },
     methods:{
         scrollTo(x,y,time=300){
-            this.scroll.scrollTo(x,y,time)
+            this.scroll && this.scroll.scrollTo(x,y,time)
         },
 
         finishPullUp(){
             this.scroll.finishPullUp()
+        },
+        refresh(){
+            console.log('-----------');
+            this.scroll && this.scroll.refresh()
         }
     }
 
