@@ -36,7 +36,7 @@ import BackTop from 'components/content/backTop/BackTop'
 
 //方法,请求网络数据
 import  {getHomeMultidata , getHomeGoods} from 'network/home.js'
-// import { set } from 'vue/types/umd'
+import {debounce} from 'common/utils'
 
   export default {
     // eslint-disable-next-line vue/multi-word-component-names
@@ -92,7 +92,7 @@ import  {getHomeMultidata , getHomeGoods} from 'network/home.js'
       // })
 
       // 防抖
-      const refresh = this.debounce(this.$refs.scroll.refresh,200)
+      const refresh = debounce(this.$refs.scroll.refresh,200)
 
       this.$bus.$on('itemImageLoad',() =>{
         refresh()
@@ -103,16 +103,6 @@ import  {getHomeMultidata , getHomeGoods} from 'network/home.js'
       /**
        * 事件监听相关的方法
        */
-      debounce(func,delay){
-        let  timer =null
-
-        return function(...args){
-            if(timer) clearTimeout(timer)
-            timer = setTimeout(() => {
-              func.apply(this,args)
-            },delay)
-        }
-      },
       tabClick(index){
         console.log(index);
         switch(index){
